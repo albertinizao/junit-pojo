@@ -1,7 +1,9 @@
 package com.opipo.junit.pojo.service;
 
 import com.opipo.junit.pojo.model.ClassLoaded;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ComparableWritter {
 
     public String writeMethods(ClassLoaded clazz){

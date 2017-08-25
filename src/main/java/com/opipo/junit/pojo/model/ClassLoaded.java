@@ -33,7 +33,7 @@ public class ClassLoaded {
                     if (!braceOpened) {
                         if (!line.contains(" static ")) {
                             line = line.contains("=") ? line.substring(0, line.indexOf("=")) : line;
-                            if (line.contains(" ")) {
+                            if (line.contains(" ") && !line.startsWith("//") && !line.startsWith("/*")) {
                                 line = line.startsWith("private")?line.replaceFirst("private",""):line.startsWith("public")?line.replaceFirst("public",""):line;
                                 attributes.add(Utils.removeSemicolon(line.trim()));
                             }

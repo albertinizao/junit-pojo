@@ -32,7 +32,7 @@ public class ClassLoadedTest {
                 "}\n";
         List<String> imports = Arrays.asList("io.swagger.annotations.ApiModel", "io.swagger.annotations.ApiModelProperty",
                 "org.hibernate.validator.constraints.NotEmpty", "org.springframework.data.annotation.Id", "org.springframework.data.mongodb.core.mapping.Document");
-        List<String> attributes = Arrays.asList("private Integer position", "private String name");
+        List<String> attributes = Arrays.asList("Integer position", "String name");
         ClassLoaded classLoaded = new ClassLoaded(clazz);
         Assertions.assertEquals("com.opipo.rev.lorewiki.model", classLoaded.getPackageName());
         Assertions.assertEquals("Section", classLoaded.getClassName());
