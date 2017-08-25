@@ -1,0 +1,172 @@
+package com.opipo.junit.pojo.service;
+
+import com.opipo.junit.pojo.model.ClassLoaded;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class POJOJunitWritterTest {
+
+    @Test
+    void givenClazzThenWriteHisTests(){
+        POJOJunitWritter writter = new POJOJunitWritter();
+
+        String clazz = "package com.opipo.rev.lorewiki.model;\n" +
+                "\n" +
+                "import io.swagger.annotations.ApiModel;\n" +
+                "import io.swagger.annotations.ApiModelProperty;\n" +
+                "import org.hibernate.validator.constraints.NotEmpty;\n" +
+                "import org.springframework.data.annotation.Id;\n" +
+                "import org.springframework.data.mongodb.core.mapping.Document;\n" +
+                "\n" +
+                "@ApiModel(value = \"Section\", description = \"Section of information in a page\")\n" +
+                "public class Section {\n" +
+                "\n" +
+                "    @Id\n" +
+                "    @ApiModelProperty(value = \"The url to access\", required = true, example = \"naciones/humanas\")\n" +
+                "    @NotEmpty\n" +
+                "    private Integer position;\n" +
+                "\n" +
+                "    @ApiModelProperty(value = \"The title of the page\", required = true, example = \"naciones humanas\")\n" +
+                "    @NotEmpty\n" +
+                "    private String name;\n" +
+                "}\n";
+        ClassLoaded classLoaded = new ClassLoaded(clazz);
+
+        String expected = "package com.opipo.rev.lorewiki.model;\n" +
+                "\n" +
+                "import static org.junit.Assert.assertEquals;\n" +
+                "import static org.junit.Assert.assertNull;\n" +
+                "import static org.junit.Assert.assertNotEquals;\n" +
+                "import org.junit.Before;\n" +
+                "import org.junit.Test;\n" +
+                "\n" +
+                "public class SectionTest {\n" +
+                "\n" +
+                "private  Section section;\n" +
+                "\n" +
+                "@Before\n" +
+                "public void init(){\n" +
+                "section = new Section();\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "@Test\n" +
+                "public void positionAttributeTest(){\n" +
+                "Integer position = Integer.valueOf(1);\n" +
+                "section.setPosition(position);\n" +
+                "assertEquals(\"The attribute is not the expected\",position,section.getPosition());\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "@Test\n" +
+                "public void nameAttributeTest(){\n" +
+                "String name = Integer.toString(2);\n" +
+                "section.setName(name);\n" +
+                "assertEquals(\"The attribute is not the expected\",name,section.getName());\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "@Test\n" +
+                "public void givenSameObjReturnThatTheyAreEquals(){\n" +
+                "Section o1 = new Section();\n" +
+                "Section o2 = new Section();\n" +
+                "assertEquals(\"The object must be equals\",o1, o2);\n" +
+                "}\n" +
+                "\n" +
+                "@Test\n" +
+                "public void givenSameObjReturnZero(){\n" +
+                "Section o1 = new Section();\n" +
+                "Section o2 = new Section();\n" +
+                "assertEquals(\"The object must be equals\",0, o1.compareTo(o2));\n" +
+                "}\n" +
+                "\n" +
+                "@Test\n" +
+                "public void givenObjectFromOtherClassReturnThatTheyArentEquals(){\n" +
+                "Section o1 = new Section();\n" +
+                "assertNotEquals(\"The object are from distinct classes\",o1, new String());\n" +
+                "}\n" +
+                "\n" +
+                "@Test\n" +
+                "public void givenSameObjReturnSameHashCode(){\n" +
+                "Section o1 = new Section();\n" +
+                "Section o2 = new Section();\n" +
+                "assertEquals(\"The object must be equals\",o1.hashCode(), o2.hashCode());\n" +
+                "}\n" +
+                "\n" +
+                "}";
+
+        String expectedJunit5 = "package com.opipo.rev.lorewiki.model;\n" +
+                "\n" +
+                "import static org.junit.jupiter.api.Assertions.assertEquals;\n" +
+                "import static org.junit.jupiter.api.Assertions.assertNull;\n" +
+                "import static org.junit.jupiter.api.Assertions.assertNotEquals;\n" +
+                "import org.junit.jupiter.api.BeforeEach;\n" +
+                "import org.junit.jupiter.api.Test;\n" +
+                "import org.junit.jupiter.api.DisplayName;\n" +
+                "\n" +
+                "@DisplayName(\"Section autogenerated\")\n" +
+                "public class SectionTest {\n" +
+                "\n" +
+                "private  Section section;\n" +
+                "\n" +
+                "@BeforeEach\n" +
+                "public void init(){\n" +
+                "section = new Section();\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "@Test\n" +
+                "@DisplayName(\"The getter and the setter of position work well\")\n" +
+                "public void positionAttributeTest(){\n" +
+                "Integer position = Integer.valueOf(1);\n" +
+                "section.setPosition(position);\n" +
+                "assertEquals(position,section.getPosition());\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "@Test\n" +
+                "@DisplayName(\"The getter and the setter of name work well\")\n" +
+                "public void nameAttributeTest(){\n" +
+                "String name = Integer.toString(2);\n" +
+                "section.setName(name);\n" +
+                "assertEquals(name,section.getName());\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "@Test\n" +
+                "public void givenSameObjReturnThatTheyAreEquals(){\n" +
+                "Section o1 = new Section();\n" +
+                "Section o2 = new Section();\n" +
+                "assertEquals(o1, o2);\n" +
+                "}\n" +
+                "\n" +
+                "@Test\n" +
+                "public void givenSameObjReturnZero(){\n" +
+                "Section o1 = new Section();\n" +
+                "Section o2 = new Section();\n" +
+                "assertEquals(0, o1.compareTo(o2));\n" +
+                "}\n" +
+                "\n" +
+                "@Test\n" +
+                "public void givenObjectFromOtherClassReturnThatTheyArentEquals(){\n" +
+                "Section o1 = new Section();\n" +
+                "assertNotEquals(o1, new String());\n" +
+                "}\n" +
+                "\n" +
+                "@Test\n" +
+                "public void givenSameObjReturnSameHashCode(){\n" +
+                "Section o1 = new Section();\n" +
+                "Section o2 = new Section();\n" +
+                "assertEquals(o1.hashCode(), o2.hashCode());\n" +
+                "}\n" +
+                "\n" +
+                "}";
+
+        Assertions.assertEquals(expected, writter.writeMethods(classLoaded,false).trim());
+        Assertions.assertEquals(expectedJunit5, writter.writeMethods(classLoaded,true).trim());
+    }
+}
