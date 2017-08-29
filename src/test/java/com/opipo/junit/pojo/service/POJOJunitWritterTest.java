@@ -166,7 +166,7 @@ public class POJOJunitWritterTest {
                 "\n" +
                 "}";
 
-        Assertions.assertEquals(expected, writter.writeMethods(classLoaded,false).trim());
-        Assertions.assertEquals(expectedJunit5, writter.writeMethods(classLoaded,true).trim());
+        Assertions.assertEquals(expected, writter.writeMethods(classLoaded,false, false).trim());
+        Assertions.assertEquals(expectedJunit5, writter.writeMethods(classLoaded,true, false).trim());
     }
 }
