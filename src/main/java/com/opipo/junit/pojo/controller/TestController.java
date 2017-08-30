@@ -97,10 +97,10 @@ public class TestController {
             throw new IllegalArgumentException("Version is incorrect. You need to put one correctly");
         }
         String versionToCheck=version==null?versionNumber:version;
-        if (!Arrays.asList("4","5").contains(versionToCheck)){
+        if (!Arrays.asList("4","5","spock").contains(versionToCheck)){
             throw new IllegalArgumentException("Version is incorrect. Only supported 4 or 5");
         }
-        return new ResponseEntity<String>(pojoJunitWritter.writeMethods(new ClassLoaded(text),versionToCheck.equalsIgnoreCase("5")), HttpStatus.OK);
+        return new ResponseEntity<String>(pojoJunitWritter.writeMethods(new ClassLoaded(text),versionToCheck.equalsIgnoreCase("5"),versionToCheck.equalsIgnoreCase("spock")), HttpStatus.OK);
     }
 
     @RequestMapping(value = {"","/junit{versionNumber}"}, method = RequestMethod.PUT)
@@ -113,9 +113,9 @@ public class TestController {
             throw new IllegalArgumentException("Version is incorrect. You need to put one correctly");
         }
         String versionToCheck=version==null?versionNumber:version;
-        if (!Arrays.asList("4","5").contains(versionToCheck)){
+        if (!Arrays.asList("4","5","spock").contains(versionToCheck)){
             throw new IllegalArgumentException("Version is incorrect. Only supported 4 or 5");
         }
-        return new ResponseEntity<String>(pojoJunitWritter.writeMethods(new ClassLoaded(new String(file.getBytes())),versionToCheck.equalsIgnoreCase("5")), HttpStatus.OK);
+        return new ResponseEntity<String>(pojoJunitWritter.writeMethods(new ClassLoaded(new String(file.getBytes())),versionToCheck.equalsIgnoreCase("5"),versionToCheck.equalsIgnoreCase("spock")), HttpStatus.OK);
     }
 }
